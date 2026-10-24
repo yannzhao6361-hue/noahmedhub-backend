@@ -2,5 +2,6 @@ com\noahmedhub\resources\FaqResource.class
 com\noahmedhub\api\CorsFilter.class
 com\noahmedhub\model\User.class
 com\noahmedhub\resources\TestResource.class
+com\noahmedhub\servlet\TestServlet.class
 com\noahmedhub\config\RestApplication.class
 com\noahmedhub\resources\UserResource.class
