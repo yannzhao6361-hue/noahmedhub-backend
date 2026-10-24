@@ -17,7 +17,9 @@ import java.util.Date;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
-    private static final String MONGO_URI = "mongodb://localhost:27017";
+  //  private static final String MONGO_URI = "mongodb://localhost:27017";
+    private static final String MONGO_URI = System.getenv("MONGODB_URI") != null ? 
+            System.getenv("MONGODB_URI") : "mongodb://localhost:27017";
     // 复用 MongoClient 实例（内部自带连接池，避免每次请求重连）
     private static final MongoClient MONGO_CLIENT = MongoClients.create(MONGO_URI);
 
@@ -52,9 +54,10 @@ public class UserResource {
         }
 
         try {
-            MongoDatabase database = MONGO_CLIENT.getDatabase("MEDHUB");
+//            MongoDatabase database = MONGO_CLIENT.getDatabase("MEDHUB");
+//            MongoCollection<Document> collection = database.getCollection("users");
+            MongoDatabase database = MONGO_CLIENT.getDatabase("NoahMedhubDB");
             MongoCollection<Document> collection = database.getCollection("users");
-
             Document doc = new Document("firstname", user.getFirstName() != null ? user.getFirstName() : user.getFirstname())
                     .append("lastname", user.getLastName() != null ? user.getLastName() : user.getLastname())
                     .append("email", user.getEmail())

@@ -16,8 +16,10 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class FaqResource {
 
-    private static final String MONGO_URI = "mongodb://localhost:27017";
-    private static final MongoClient MONGO_CLIENT = MongoClients.create(MONGO_URI);
+   // private static final String MONGO_URI = "mongodb://localhost:27017";
+	private static final String MONGO_URI = System.getenv("MONGODB_URI") != null ? 
+            System.getenv("MONGODB_URI") : "mongodb://localhost:27017";
+	private static final MongoClient MONGO_CLIENT = MongoClients.create(MONGO_URI);
 
     private Response.ResponseBuilder buildCorsResponse(Response.Status status) {
         return Response.status(status)
@@ -34,8 +36,9 @@ public class FaqResource {
     @GET
     public Response getAllFaqs() {
         try {
-            MongoDatabase database = MONGO_CLIENT.getDatabase("MEDHUB");
-            MongoCollection<Document> collection = database.getCollection("FAQ");
+          //  MongoDatabase database = MONGO_CLIENT.getDatabase("MEDHUB");
+        	MongoDatabase database = MONGO_CLIENT.getDatabase("NoahMedhubDB");
+        	MongoCollection<Document> collection = database.getCollection("FAQ");
 
             List<Document> faqs = new ArrayList<>();
             for (Document doc : collection.find()) {
