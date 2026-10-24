@@ -6,4 +6,14 @@
 
     <display-name>noahmedhub</display-name>
 
+    <!-- 显式注册 TestServlet -->
+    <servlet>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>com.noahmedhub.servlet.TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+
 </web-app>
